@@ -1,6 +1,6 @@
-# Domino Frontend (Streamlit)
+# Domino Frontend - Clinical Trial Assistant
 
-Streamlit frontend application designed to run as a separate Domino App, connecting to the backend service.
+Streamlit chat interface for querying clinical trial data using natural language.
 
 ## Domino App Prerequisites
 
@@ -9,20 +9,52 @@ Before deploying this app, ensure the following settings are enabled in Domino:
 1. **Enable Secure App Identity Propagation** - Required for JWT token-based authentication between Domino apps
 2. **Enable Deeplinking and Querying** - Required for cross-app API communication
 
-These settings can be configured in the Domino Admin settings or per-app settings.
-
 ## Architecture
 
 ```
-┌─────────────────────────┐         ┌─────────────────────────┐
-│  Domino Frontend App    │  HTTP   │   Domino Backend App    │
-│  (Streamlit on 8888)    │────────▶│   (FastAPI on 8888)     │
-│                         │         │                         │
-│  - Items Manager        │         │  - /api/items           │
-│  - Random Quote         │         │  - /api/random-quote    │
-│  - System Info          │         │  - /health              │
-└─────────────────────────┘         └─────────────────────────┘
+┌───────────────────────────────────────┐
+│      Domino Frontend App              │
+│      (Streamlit on port 8888)         │
+│                                       │
+│  ┌─────────────────────────────────┐  │
+│  │         Chat Interface          │  │
+│  │  - Natural language input       │  │
+│  │  - AI-powered responses         │  │
+│  │  - SQL query visibility         │  │
+│  └─────────────────────────────────┘  │
+│                  │                    │
+│  ┌─────────────────────────────────┐  │
+│  │         Sidebar                 │  │
+│  │  - System health status         │  │
+│  │  - Trial browser                │  │
+│  │  - Database statistics          │  │
+│  └─────────────────────────────────┘  │
+│                  │                    │
+│           JWT Token Auth              │
+│      (localhost:8899/access-token)    │
+│                  │                    │
+│                  ▼                    │
+│         Backend API Calls             │
+└───────────────────────────────────────┘
 ```
+
+## Features
+
+- **Natural Language Queries** - Ask questions about clinical trials in plain English
+- **AI-Powered Answers** - Claude AI generates SQL and summarizes results
+- **Trial Browser** - View all available trials in the sidebar
+- **Chat History** - Maintains conversation context within session
+- **SQL Visibility** - Optionally view the generated SQL queries
+- **Example Questions** - Quick-start buttons for common queries
+
+## Example Questions
+
+- "How many patients are enrolled in each trial?"
+- "What are the most common adverse events?"
+- "Show patient demographics for the Uveitis study"
+- "Compare adverse event rates across treatment arms"
+- "List all severe adverse events in ophthalmology trials"
+- "What is the average age of patients in Phase 3 trials?"
 
 ## Files
 
@@ -34,54 +66,57 @@ domino_frontend/
 └── README.md        # This file
 ```
 
-## Features
-
-- **Items Manager**: Create, view, and delete items
-- **Random Quote Generator**: Get inspirational quotes from backend
-- **System Info**: View configuration and test backend connection
-- **Health Check**: Monitor backend status
-
-## Domino Deployment
-
-### 1. Create a new Domino Project
-- Create a new project for the frontend
-- Push these files to the project repository
-
-### 2. Configure Environment Variables
-Set the following environment variable in Domino:
-- `BACKEND_URL`: URL of the backend Domino app
-  - Example: `https://your-domino-instance.com/app/backend-project-name`
-
-### 3. Create Domino App
-- Go to **Publish > App**
-- Set the app script to: `app.sh`
-- The app will run on port 8888 (Domino requirement)
-
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `BACKEND_URL` | URL of the FastAPI backend app | `http://localhost:8888` |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `BACKEND_URL` | URL of the backend Domino app | Yes |
+
+## Deployment
+
+### 1. Deploy Backend First
+Ensure the backend app is deployed and note its URL.
+
+### 2. Create Domino Project
+Push these files to a new Domino project repository.
+
+### 3. Set Environment Variables
+```
+BACKEND_URL=https://your-domino-instance.com/apps/app-backend
+```
+
+### 4. Create Domino App
+- Go to **Publish > App**
+- Set the app script to: `app.sh`
+- Enable required prerequisites (see above)
+
+## Authentication
+
+The frontend automatically handles authentication for cross-app communication:
+
+1. Obtains JWT token from Domino's local endpoint (`http://localhost:8899/access-token`)
+2. Includes token as `Authorization: Bearer` header in all backend requests
+3. Enables secure communication between Domino apps
 
 ## Local Testing
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Set backend URL (if backend is running elsewhere)
 export BACKEND_URL="http://localhost:8888"
-
-# Run the app
-streamlit run app.py --server.port 8888
+pip install -r requirements.txt
+streamlit run app.py --server.port 8889
 ```
 
-The UI will be available at `http://localhost:8888`
+Note: When running locally, JWT token authentication will not be available. The backend should still work without authentication for local development.
 
-## Connecting to Backend
+## UI Components
 
-The frontend connects to the backend via the `BACKEND_URL` environment variable.
-Make sure to:
-1. Deploy the backend app first
-2. Get the backend app URL from Domino
-3. Set `BACKEND_URL` in the frontend project's environment variables
+### Sidebar
+- **System Status**: Shows backend, database, and Claude API health
+- **Data Counts**: Displays number of trials, patients, and adverse events
+- **Trial Browser**: Expandable list of all clinical trials with details
+
+### Main Area
+- **Example Questions**: Clickable buttons for common queries
+- **Chat Input**: Text field for natural language questions
+- **Response Display**: AI-generated answers with optional SQL query view
+- **Clear History**: Button to reset conversation

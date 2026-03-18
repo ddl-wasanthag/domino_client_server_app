@@ -50,12 +50,19 @@ domino_client_server_app/
 
 ## Dataset
 
-The `data/` directory contains a synthetic pharma dataset you can copy into a Domino Dataset.
-To point the API at a Domino Dataset instead of the bundled `./data` folder, set:
+The `data/` directory contains a synthetic pharma dataset. To use it with a Domino Dataset:
 
-```bash
-export DATA_DIR=/domino/datasets/local/<your-dataset-name>
-```
+1. Copy the CSV files from the `data/` folder into your Domino Dataset using the workspace terminal or the Domino Datasets UI.
+2. Set the `DATA_DIR` environment variable so the API knows where to find them. The easiest way is to add it as a **project environment variable** under **Domino project settings**.
+
+Use the path that matches your project type:
+
+| Project type | `DATA_DIR` value |
+|---|---|
+| Git-based Domino project | `/mnt/data/<project-name>` |
+| Domino filesystem-based project | `/domino/datasets/local/<project-name>` |
+
+If `DATA_DIR` is not set, the app falls back to the bundled `./data` folder.
 
 | File | Description |
 |---|---|

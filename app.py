@@ -93,12 +93,18 @@ def badge(text: str, colour_map: dict) -> str:
     return f":{colour}[{text}]"
 
 
+def api_tip(method: str, path: str) -> str:
+    """Return a tooltip string showing the API route for a widget."""
+    return f"API: {method} {BACKEND_URL}{path}"
+
+
 # ---------------------------------------------------------------------------
 # Page: Dashboard
 # ---------------------------------------------------------------------------
 
 if page == "Dashboard":
     st.header("Dashboard")
+    st.caption(f"API: `GET {BACKEND_URL}/api/dashboard/stats`")
     data = _get("/api/dashboard/stats")
     if data:
         c1, c2, c3, c4, c5 = st.columns(5)
@@ -148,12 +154,17 @@ elif page == "Drug Catalog":
         f_approval = fc1.selectbox(
             "Approval Status",
             ["All", "Approved", "Under Review", "In Trial"],
+            help=api_tip("GET", "/api/drugs?approval_status=<value>"),
         )
         f_phase = fc2.selectbox(
             "Phase",
             ["All", "Phase I", "Phase II", "Phase III", "Phase IV"],
+            help=api_tip("GET", "/api/drugs?phase=<value>"),
         )
-        f_class = fc3.text_input("Drug Class (partial match)", "")
+        f_class = fc3.text_input(
+            "Drug Class (partial match)", "",
+            help="Client-side filter applied after GET /api/drugs",
+        )
 
     params = {}
     if f_approval != "All":
@@ -161,6 +172,7 @@ elif page == "Drug Catalog":
     if f_phase != "All":
         params["phase"] = f_phase
 
+    st.caption(f"API: `GET {BACKEND_URL}/api/drugs`")
     data = _get("/api/drugs", params=params)
     if data:
         drugs = data["drugs"]
@@ -180,7 +192,11 @@ elif page == "Drug Catalog":
                 c2.write(f"**Half-life:** {d['half_life_hours']} h")
                 c2.write(f"**Manufacturer:** {d['manufacturer']}")
 
-                if st.button("View Interactions", key=f"ix_{d['drug_id']}"):
+                if st.button(
+                    "View Interactions",
+                    key=f"ix_{d['drug_id']}",
+                    help=api_tip("GET", f"/api/drugs/{d['drug_id']}/interactions"),
+                ):
                     ix = _get(f"/api/drugs/{d['drug_id']}/interactions")
                     if ix and ix["count"]:
                         st.dataframe(
@@ -208,10 +224,12 @@ elif page == "Clinical Trials":
 
     fc1, fc2 = st.columns(2)
     f_status = fc1.selectbox(
-        "Status", ["All", "Recruiting", "Active", "Completed", "Suspended"]
+        "Status", ["All", "Recruiting", "Active", "Completed", "Suspended"],
+        help=api_tip("GET", "/api/trials?status=<value>"),
     )
     f_phase = fc2.selectbox(
-        "Phase", ["All", "Phase I", "Phase II", "Phase III", "Phase IV"]
+        "Phase", ["All", "Phase I", "Phase II", "Phase III", "Phase IV"],
+        help=api_tip("GET", "/api/trials?phase=<value>"),
     )
 
     params = {}
@@ -220,6 +238,7 @@ elif page == "Clinical Trials":
     if f_phase != "All":
         params["phase"] = f_phase
 
+    st.caption(f"API: `GET {BACKEND_URL}/api/trials`")
     data = _get("/api/trials", params=params)
     if data:
         st.caption(f"{data['count']} trial(s) found")
@@ -244,6 +263,9 @@ elif page == "Clinical Trials":
 
                 tab_p, tab_ae = st.tabs(["Patients", "Adverse Events"])
                 with tab_p:
+                    st.caption(
+                        f"API: `GET {BACKEND_URL}/api/trials/{t['trial_id']}/patients`"
+                    )
                     pd = _get(f"/api/trials/{t['trial_id']}/patients")
                     if pd:
                         st.caption(
@@ -268,6 +290,9 @@ elif page == "Clinical Trials":
                             )
 
                 with tab_ae:
+                    st.caption(
+                        f"API: `GET {BACKEND_URL}/api/trials/{t['trial_id']}/adverse-events`"
+                    )
                     aed = _get(f"/api/trials/{t['trial_id']}/adverse-events")
                     if aed:
                         sc = aed.get("severity_breakdown", {})
@@ -303,9 +328,18 @@ elif page == "Patient Registry":
 
     with tab_browse:
         fc1, fc2, fc3 = st.columns(3)
-        f_trial = fc1.text_input("Trial ID", "")
-        f_status = fc2.selectbox("Status", ["All", "Active", "Completed", "Discontinued"])
-        f_gender = fc3.selectbox("Gender", ["All", "Male", "Female"])
+        f_trial = fc1.text_input(
+            "Trial ID", "",
+            help=api_tip("GET", "/api/patients?trial_id=<value>"),
+        )
+        f_status = fc2.selectbox(
+            "Status", ["All", "Active", "Completed", "Discontinued"],
+            help=api_tip("GET", "/api/patients?status=<value>"),
+        )
+        f_gender = fc3.selectbox(
+            "Gender", ["All", "Male", "Female"],
+            help=api_tip("GET", "/api/patients?gender=<value>"),
+        )
 
         params = {}
         if f_trial:
@@ -315,6 +349,7 @@ elif page == "Patient Registry":
         if f_gender != "All":
             params["gender"] = f_gender
 
+        st.caption(f"API: `GET {BACKEND_URL}/api/patients`")
         data = _get("/api/patients", params=params)
         if data:
             st.caption(f"{data['count']} patient(s)")
@@ -338,8 +373,12 @@ elif page == "Patient Registry":
                 )
 
         st.subheader("Patient Detail Lookup")
-        pid = st.text_input("Enter Patient ID (e.g. P0001)")
+        pid = st.text_input(
+            "Enter Patient ID (e.g. P0001)",
+            help=api_tip("GET", "/api/patients/{patient_id}"),
+        )
         if pid:
+            st.caption(f"API: `GET {BACKEND_URL}/api/patients/{pid}`")
             pd = _get(f"/api/patients/{pid}")
             if pd:
                 c1, c2 = st.columns(2)
@@ -360,6 +399,7 @@ elif page == "Patient Registry":
 
     with tab_enroll:
         st.subheader("Enroll a New Patient")
+        st.caption(f"API: `POST {BACKEND_URL}/api/patients`")
         with st.form("enroll_form"):
             c1, c2 = st.columns(2)
             trial_id = c1.text_input("Trial ID *", placeholder="e.g. T001")
@@ -372,7 +412,11 @@ elif page == "Patient Registry":
                 "Baseline Score (numeric or descriptive)",
                 placeholder="e.g. 72 or CHADS2=3",
             )
-            submitted = st.form_submit_button("Enroll Patient", type="primary")
+            submitted = st.form_submit_button(
+                "Enroll Patient",
+                type="primary",
+                help=api_tip("POST", "/api/patients"),
+            )
 
         if submitted:
             if not all([trial_id, diagnosis, site_id, country, baseline_score]):
@@ -406,9 +450,18 @@ elif page == "Adverse Events":
 
     with tab_browse:
         fc1, fc2, fc3 = st.columns(3)
-        f_sev = fc1.selectbox("Severity", ["All", "Mild", "Moderate", "Severe"])
-        f_serious = fc2.selectbox("Serious", ["All", "Yes", "No"])
-        f_drug = fc3.text_input("Drug ID", "")
+        f_sev = fc1.selectbox(
+            "Severity", ["All", "Mild", "Moderate", "Severe"],
+            help=api_tip("GET", "/api/adverse-events?severity=<value>"),
+        )
+        f_serious = fc2.selectbox(
+            "Serious", ["All", "Yes", "No"],
+            help=api_tip("GET", "/api/adverse-events?serious=Yes|No"),
+        )
+        f_drug = fc3.text_input(
+            "Drug ID", "",
+            help=api_tip("GET", "/api/adverse-events?drug_id=<value>"),
+        )
 
         params = {}
         if f_sev != "All":
@@ -418,6 +471,7 @@ elif page == "Adverse Events":
         if f_drug:
             params["drug_id"] = f_drug
 
+        st.caption(f"API: `GET {BACKEND_URL}/api/adverse-events`")
         data = _get("/api/adverse-events", params=params)
         if data:
             st.caption(f"{data['count']} adverse event(s)")
@@ -443,6 +497,7 @@ elif page == "Adverse Events":
 
     with tab_report:
         st.subheader("Report an Adverse Event")
+        st.caption(f"API: `POST {BACKEND_URL}/api/adverse-events`")
         with st.form("ae_form"):
             c1, c2 = st.columns(2)
             patient_id = c1.text_input("Patient ID *", placeholder="e.g. P0001")
@@ -456,7 +511,11 @@ elif page == "Adverse Events":
                 "Causality *", ["Probable", "Definite", "Possible", "Unlikely"]
             )
             reported_by = st.text_input("Reported By *", placeholder="e.g. Dr. Smith")
-            submitted = st.form_submit_button("Submit Report", type="primary")
+            submitted = st.form_submit_button(
+                "Submit Report",
+                type="primary",
+                help=api_tip("POST", "/api/adverse-events"),
+            )
 
         if submitted:
             if not all([patient_id, drug_id, trial_id, event_type, reported_by]):
@@ -497,8 +556,14 @@ elif page == "Drug Interactions":
 
     with tab_all:
         fc1, fc2 = st.columns(2)
-        f_sev = fc1.selectbox("Severity", ["All", "Mild", "Moderate", "Severe"])
-        f_drug = fc2.text_input("Drug ID (filter)", "")
+        f_sev = fc1.selectbox(
+            "Severity", ["All", "Mild", "Moderate", "Severe"],
+            help=api_tip("GET", "/api/drug-interactions?severity=<value>"),
+        )
+        f_drug = fc2.text_input(
+            "Drug ID (filter)", "",
+            help=api_tip("GET", "/api/drug-interactions?drug_id=<value>"),
+        )
 
         params = {}
         if f_sev != "All":
@@ -506,6 +571,7 @@ elif page == "Drug Interactions":
         if f_drug:
             params["drug_id"] = f_drug
 
+        st.caption(f"API: `GET {BACKEND_URL}/api/drug-interactions`")
         data = _get("/api/drug-interactions", params=params)
         if data:
             st.caption(f"{data['count']} interaction(s)")
@@ -525,6 +591,9 @@ elif page == "Drug Interactions":
 
     with tab_check:
         st.subheader("Check Interaction Between Two Drugs")
+        st.caption(
+            f"API: `GET {BACKEND_URL}/api/drug-interactions/check?drug_id_1=<id>&drug_id_2=<id>`"
+        )
 
         drug_list_data = _get("/api/drugs")
         drug_options = {}
@@ -539,7 +608,11 @@ elif page == "Drug Interactions":
             sel1 = c1.selectbox("First Drug", list(drug_options.keys()), key="ix_d1")
             sel2 = c2.selectbox("Second Drug", list(drug_options.keys()), key="ix_d2")
 
-            if st.button("Check Interaction", type="primary"):
+            if st.button(
+                "Check Interaction",
+                type="primary",
+                help=api_tip("GET", "/api/drug-interactions/check?drug_id_1=...&drug_id_2=..."),
+            ):
                 d1 = drug_options[sel1]
                 d2 = drug_options[sel2]
                 if d1 == d2:
@@ -609,7 +682,10 @@ elif page == "System Info":
             st.write(f":{colour}[{method}] `{path}`")
 
     st.divider()
-    if st.button("Test Backend Connection"):
+    if st.button(
+        "Test Backend Connection",
+        help=api_tip("GET", "/"),
+    ):
         with st.spinner("Connecting..."):
             data = _get("/")
             if data:

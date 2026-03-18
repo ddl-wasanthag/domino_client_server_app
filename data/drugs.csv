@@ -1,0 +1,13 @@
+drug_id,name,compound_name,drug_class,indication,phase,approval_status,manufacturer,moa,molecular_weight,half_life_hours
+D001,Oncovitinib,ONV-4821,Kinase Inhibitor,Non-Small Cell Lung Cancer,Phase III,Under Review,AstraZeneca,EGFR/ALK dual inhibition,487.6,24.3
+D002,Renalstat,RST-2290,mTOR Inhibitor,Renal Cell Carcinoma,Approved,Approved,AstraZeneca,mTOR pathway blockade,543.2,18.7
+D003,Cardioprotex,CPX-1103,ACE Inhibitor,Heart Failure,Approved,Approved,AstraZeneca,Angiotensin-converting enzyme inhibition,412.8,12.1
+D004,Neuroshift,NSH-7742,SSRI,Major Depressive Disorder,Phase II,In Trial,AstraZeneca,Selective serotonin reuptake inhibition,328.4,26.8
+D005,Inflammex,IFX-3301,IL-6 Inhibitor,Rheumatoid Arthritis,Phase III,Under Review,AstraZeneca,Interleukin-6 receptor blockade,148200.0,21.0
+D006,Glucobalance,GLB-5510,GLP-1 Agonist,Type 2 Diabetes,Approved,Approved,AstraZeneca,GLP-1 receptor agonism,3916.6,168.0
+D007,Pulmorase,PMR-8820,PDE4 Inhibitor,COPD,Phase II,In Trial,AstraZeneca,Phosphodiesterase-4 inhibition,479.3,15.4
+D008,Hepatoclear,HPC-6640,FXR Agonist,Non-Alcoholic Steatohepatitis,Phase II,In Trial,AstraZeneca,Farnesoid X receptor agonism,392.5,19.2
+D009,Thrombonix,TBX-9901,Factor Xa Inhibitor,Atrial Fibrillation,Approved,Approved,AstraZeneca,Direct factor Xa inhibition,459.9,9.0
+D010,Immunoguard,IMG-1122,PD-1 Inhibitor,Melanoma,Phase III,Under Review,AstraZeneca,Programmed death-1 checkpoint blockade,143600.0,504.0
+D011,Osteoform,OTF-4450,RANKL Inhibitor,Osteoporosis,Approved,Approved,AstraZeneca,RANK ligand inhibition,147000.0,672.0
+D012,Viralblock,VBK-7730,Protease Inhibitor,HIV,Phase I,In Trial,AstraZeneca,Viral protease inhibition,505.7,11.6

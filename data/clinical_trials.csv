@@ -1,0 +1,13 @@
+trial_id,trial_name,drug_id,phase,status,start_date,end_date,enrollment_target,enrolled_count,principal_investigator,site_count,primary_endpoint,country
+T001,APEX-LUNG-301,D001,Phase III,Recruiting,2024-01-15,2026-06-30,480,312,Dr. Sarah Mitchell,22,Progression-Free Survival at 12 months,United States
+T002,RENAL-STAT-202,D002,Phase II,Active,2023-06-01,2025-12-31,180,178,Dr. James Okafor,14,Overall Response Rate,United Kingdom
+T003,HEART-PRX-401,D003,Phase IV,Completed,2021-03-01,2024-02-28,600,598,Dr. Elena Vasquez,31,Reduction in Hospitalization Rate,Germany
+T004,NEURO-NSH-201,D004,Phase II,Recruiting,2024-09-01,2027-03-31,240,88,Dr. Akira Tanaka,18,Hamilton Depression Scale Score,Japan
+T005,INFLAM-IFX-302,D005,Phase III,Active,2023-11-01,2026-10-31,550,421,Dr. Priya Sharma,27,ACR50 Response Rate,India
+T006,GLUCO-GLB-401,D006,Phase IV,Active,2022-07-01,2025-07-31,800,792,Dr. Carlos Mendez,42,HbA1c Reduction at 26 Weeks,Brazil
+T007,PULMO-PMR-201,D007,Phase II,Recruiting,2025-01-10,2027-06-30,160,34,Dr. Fiona McLaren,11,FEV1 Improvement at 24 Weeks,Canada
+T008,HEPA-HPC-202,D008,Phase II,Active,2024-03-01,2026-09-30,200,145,Dr. Wang Li,16,Reduction in Liver Fibrosis Score,China
+T009,THROM-TBX-401,D009,Phase IV,Completed,2020-01-01,2023-12-31,1200,1197,Dr. Amira Hassan,55,Stroke Prevention Rate,United States
+T010,IMMUNO-IMG-301,D010,Phase III,Active,2024-05-01,2027-04-30,420,267,Dr. Rachel Cohen,24,Overall Survival at 24 Months,Israel
+T011,OSTEO-OTF-401,D011,Phase IV,Active,2023-02-01,2026-01-31,900,854,Dr. Pierre Dupont,38,Bone Mineral Density Increase,France
+T012,VIRAL-VBK-101,D012,Phase I,Recruiting,2025-02-01,2026-08-31,60,23,Dr. Ibrahim Al-Rashid,5,Maximum Tolerated Dose,South Africa

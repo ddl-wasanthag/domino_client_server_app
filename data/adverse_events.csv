@@ -1,0 +1,31 @@
+event_id,patient_id,drug_id,trial_id,event_type,severity,onset_date,resolution_date,outcome,causality,reported_by,serious
+AE001,P0001,D001,T001,Nausea,Mild,2024-02-25,2024-03-10,Resolved,Probable,Dr. Sarah Mitchell,No
+AE002,P0001,D001,T001,Fatigue,Mild,2024-02-25,,Ongoing,Probable,Dr. Sarah Mitchell,No
+AE003,P0002,D001,T001,Elevated ALT,Moderate,2024-03-01,2024-03-20,Resolved,Possible,Dr. Sarah Mitchell,No
+AE004,P0003,D001,T001,Pneumonitis,Severe,2025-06-15,2025-07-30,Resolved,Probable,Dr. Sarah Mitchell,Yes
+AE005,P0004,D001,T001,Rash,Mild,2024-04-05,2024-04-20,Resolved,Probable,Dr. Sarah Mitchell,No
+AE006,P0006,D002,T002,Stomatitis,Moderate,2023-08-10,2023-08-25,Resolved,Definite,Dr. James Okafor,No
+AE007,P0007,D002,T002,Hyperglycemia,Moderate,2023-09-01,2023-09-15,Resolved,Probable,Dr. James Okafor,No
+AE008,P0007,D002,T002,Anemia,Mild,2023-10-01,,Ongoing,Probable,Dr. James Okafor,No
+AE009,P0009,D002,T002,Pneumonitis,Severe,2024-01-20,2024-03-05,Resolved,Probable,Dr. James Okafor,Yes
+AE010,P0010,D003,T003,Dry Cough,Mild,2021-05-10,2021-07-01,Resolved,Definite,Dr. Elena Vasquez,No
+AE011,P0011,D003,T003,Hypotension,Moderate,2021-06-02,2021-06-08,Resolved,Probable,Dr. Elena Vasquez,No
+AE012,P0012,D003,T003,Renal Impairment,Severe,2022-03-15,2022-04-20,Resolved,Probable,Dr. Elena Vasquez,Yes
+AE013,P0013,D004,T004,Insomnia,Mild,2024-10-20,,Ongoing,Probable,Dr. Akira Tanaka,No
+AE014,P0014,D004,T004,Nausea,Mild,2024-10-28,2024-11-10,Resolved,Definite,Dr. Akira Tanaka,No
+AE015,P0014,D004,T004,Headache,Mild,2024-11-05,2024-11-12,Resolved,Possible,Dr. Akira Tanaka,No
+AE016,P0016,D005,T005,Injection Site Reaction,Mild,2024-01-20,2024-01-25,Resolved,Definite,Dr. Priya Sharma,No
+AE017,P0017,D005,T005,Upper Respiratory Infection,Moderate,2024-03-10,2024-03-25,Resolved,Possible,Dr. Priya Sharma,No
+AE018,P0019,D005,T005,Serious Infection,Severe,2025-10-05,2025-11-10,Resolved,Probable,Dr. Priya Sharma,Yes
+AE019,P0020,D006,T006,Nausea,Moderate,2022-08-25,2022-09-10,Resolved,Definite,Dr. Carlos Mendez,No
+AE020,P0020,D006,T006,Vomiting,Mild,2022-08-25,2022-09-05,Resolved,Definite,Dr. Carlos Mendez,No
+AE021,P0021,D006,T006,Diarrhea,Mild,2022-09-05,2022-09-18,Resolved,Probable,Dr. Carlos Mendez,No
+AE022,P0022,D006,T006,Hypoglycemia,Moderate,2023-01-15,2023-01-16,Resolved,Possible,Dr. Carlos Mendez,Yes
+AE023,P0024,D007,T007,Headache,Mild,2025-02-05,,Ongoing,Probable,Dr. Fiona McLaren,No
+AE024,P0025,D007,T007,Nausea,Mild,2025-02-20,2025-03-05,Resolved,Probable,Dr. Fiona McLaren,No
+AE025,P0026,D008,T008,Pruritus,Mild,2024-04-28,2024-05-10,Resolved,Definite,Dr. Wang Li,No
+AE026,P0027,D008,T008,Elevated Bilirubin,Moderate,2024-05-15,2024-06-01,Resolved,Probable,Dr. Wang Li,No
+AE027,P0031,D010,T010,Fatigue,Moderate,2024-06-25,,Ongoing,Probable,Dr. Rachel Cohen,No
+AE028,P0031,D010,T010,Immune-mediated Colitis,Severe,2025-01-10,2025-02-15,Resolved,Definite,Dr. Rachel Cohen,Yes
+AE029,P0032,D010,T010,Hypothyroidism,Mild,2024-09-01,,Ongoing,Probable,Dr. Rachel Cohen,No
+AE030,P0037,D012,T012,Nausea,Mild,2025-03-01,2025-03-10,Resolved,Probable,Dr. Ibrahim Al-Rashid,No

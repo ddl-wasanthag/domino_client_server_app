@@ -1,52 +1,64 @@
 #!/bin/bash
 
-# Start script for Domino Apps following Domino's Streamlit configuration pattern
-# This script starts both FastAPI backend and Streamlit frontend
+# Start script for Domino Apps — Pharma Clinical Data Platform
+# Launches FastAPI backend (port 8000) and Streamlit frontend (port 8888).
+#
+# To point the API at a Domino Dataset instead of the bundled ./data directory:
+#   export DATA_DIR=/domino/datasets/local/<your-dataset>
 
-echo "Starting Domino Test Application..."
+echo "Starting Pharma Clinical Data Platform..."
 
-# Create Streamlit configuration directory and config file (Domino pattern)
-echo "Setting up Streamlit configuration..."
+# ------------------------------------------------------------------
+# Streamlit configuration
+# ------------------------------------------------------------------
+echo "Writing Streamlit config..."
 mkdir -p ~/.streamlit
-echo "[browser]" > ~/.streamlit/config.toml
-echo "gatherUsageStats = true" >> ~/.streamlit/config.toml
-echo "serverAddress = \"0.0.0.0\"" >> ~/.streamlit/config.toml
-echo "serverPort = 8888" >> ~/.streamlit/config.toml
-echo "[server]" >> ~/.streamlit/config.toml
-echo "port = 8888" >> ~/.streamlit/config.toml
-echo "enableCORS = false" >> ~/.streamlit/config.toml
-echo "enableXsrfProtection = false" >> ~/.streamlit/config.toml
-echo "maxMessageSize = 250" >> ~/.streamlit/config.toml
+cat > ~/.streamlit/config.toml << 'EOF'
+[browser]
+gatherUsageStats = false
+serverAddress = "0.0.0.0"
+serverPort = 8888
 
-# Start FastAPI backend in the background
+[server]
+port = 8888
+enableCORS = false
+enableXsrfProtection = false
+maxMessageSize = 250
+EOF
+
+# ------------------------------------------------------------------
+# FastAPI backend
+# ------------------------------------------------------------------
 echo "Starting FastAPI backend on port 8000..."
 python main.py &
 BACKEND_PID=$!
 
-# Wait a moment for backend to start
+# Give uvicorn a moment to bind the port
 sleep 3
 
-# Start Streamlit frontend using Domino's pattern (no CLI args needed with config file)
+# ------------------------------------------------------------------
+# Streamlit frontend
+# ------------------------------------------------------------------
 echo "Starting Streamlit frontend on port 8888..."
 streamlit run app.py &
 FRONTEND_PID=$!
 
-# Function to handle shutdown
+# ------------------------------------------------------------------
+# Graceful shutdown
+# ------------------------------------------------------------------
 shutdown() {
     echo "Shutting down services..."
-    kill $BACKEND_PID 2>/dev/null
-    kill $FRONTEND_PID 2>/dev/null
+    kill "$BACKEND_PID" 2>/dev/null
+    kill "$FRONTEND_PID" 2>/dev/null
     exit 0
 }
 
-# Trap signals for graceful shutdown
 trap shutdown SIGTERM SIGINT
 
-echo "Application started successfully!"
-echo "Backend PID: $BACKEND_PID"
-echo "Frontend PID: $FRONTEND_PID"
-echo "Streamlit config created at ~/.streamlit/config.toml"
-echo "Access the app through Domino Apps interface"
+echo "Both services started."
+echo "  Backend  PID : $BACKEND_PID"
+echo "  Frontend PID : $FRONTEND_PID"
+echo "  DATA_DIR     : ${DATA_DIR:-$(pwd)/data}"
+echo "Access the app through the Domino Apps interface."
 
-# Wait for both processes
 wait

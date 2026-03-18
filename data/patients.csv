@@ -1,0 +1,39 @@
+patient_id,trial_id,age,gender,diagnosis,enrollment_date,status,last_visit_date,site_id,baseline_score,current_score,country
+P0001,T001,58,Male,NSCLC Stage IIIB,2024-02-10,Active,2026-02-15,S001,72,45,United States
+P0002,T001,63,Female,NSCLC Stage IV,2024-02-18,Active,2026-02-20,S002,68,41,United States
+P0003,T001,71,Male,NSCLC Stage IIIA,2024-03-05,Discontinued,2025-08-12,S001,80,80,United States
+P0004,T001,55,Female,NSCLC Stage IV,2024-03-22,Active,2026-02-28,S003,65,38,Canada
+P0005,T001,67,Male,NSCLC Stage IIIB,2024-04-01,Active,2026-03-01,S004,74,50,United States
+P0006,T002,49,Female,Renal Cell Carcinoma,2023-07-14,Active,2026-02-22,S010,58,32,United Kingdom
+P0007,T002,62,Male,Renal Cell Carcinoma,2023-07-28,Active,2026-02-25,S010,63,29,United Kingdom
+P0008,T002,54,Female,Renal Cell Carcinoma,2023-08-15,Completed,2025-12-31,S011,55,48,Germany
+P0009,T002,70,Male,Renal Cell Carcinoma,2023-09-01,Active,2026-02-20,S012,70,40,France
+P0010,T003,75,Female,Heart Failure NYHA III,2021-04-12,Completed,2024-02-28,S020,88,62,Germany
+P0011,T003,68,Male,Heart Failure NYHA II,2021-04-20,Completed,2024-02-28,S021,82,58,Germany
+P0012,T003,80,Female,Heart Failure NYHA III,2021-05-05,Completed,2024-02-28,S020,91,70,Austria
+P0013,T004,34,Male,Major Depressive Disorder,2024-10-01,Active,2026-02-14,S030,24,18,Japan
+P0014,T004,28,Female,Major Depressive Disorder,2024-10-15,Active,2026-02-20,S031,27,21,Japan
+P0015,T004,41,Male,Major Depressive Disorder,2024-11-01,Active,2026-02-28,S030,22,16,South Korea
+P0016,T005,52,Female,Rheumatoid Arthritis,2024-01-05,Active,2026-02-26,S040,48,28,India
+P0017,T005,45,Male,Rheumatoid Arthritis,2024-01-20,Active,2026-03-01,S041,52,30,India
+P0018,T005,60,Female,Rheumatoid Arthritis,2024-02-08,Active,2026-02-18,S042,55,35,Australia
+P0019,T005,38,Male,Rheumatoid Arthritis,2024-02-25,Discontinued,2025-11-30,S040,50,50,India
+P0020,T006,57,Female,Type 2 Diabetes,2022-08-10,Active,2026-02-28,S050,9.2,7.1,Brazil
+P0021,T006,64,Male,Type 2 Diabetes,2022-08-22,Active,2026-02-25,S051,8.8,6.9,Brazil
+P0022,T006,48,Female,Type 2 Diabetes,2022-09-05,Active,2026-03-01,S052,10.1,7.4,Mexico
+P0023,T006,71,Male,Type 2 Diabetes,2022-09-18,Active,2026-02-20,S050,9.5,7.2,Brazil
+P0024,T007,66,Male,COPD GOLD Stage III,2025-01-25,Active,2026-02-28,S060,42,38,Canada
+P0025,T007,72,Female,COPD GOLD Stage II,2025-02-08,Active,2026-03-01,S061,45,41,United States
+P0026,T008,54,Male,NASH with Fibrosis F3,2024-04-10,Active,2026-02-22,S070,3.8,2.9,China
+P0027,T008,47,Female,NASH with Fibrosis F2,2024-04-25,Active,2026-02-28,S071,2.9,2.2,China
+P0028,T008,61,Male,NASH with Fibrosis F3,2024-05-12,Active,2026-02-15,S070,4.1,3.1,Japan
+P0029,T009,72,Female,Atrial Fibrillation,2020-02-15,Completed,2023-12-31,S080,CHADS2=3,CHADS2=3,United States
+P0030,T009,68,Male,Atrial Fibrillation,2020-03-01,Completed,2023-12-31,S081,CHADS2=4,CHADS2=4,United States
+P0031,T010,61,Female,Melanoma Stage IV,2024-06-05,Active,2026-02-28,S090,42,28,Israel
+P0032,T010,55,Male,Melanoma Stage III,2024-06-20,Active,2026-03-01,S091,38,22,United States
+P0033,T010,68,Female,Melanoma Stage IV,2024-07-08,Active,2026-02-20,S090,45,31,United Kingdom
+P0034,T011,74,Female,Postmenopausal Osteoporosis,2023-03-10,Active,2026-01-31,S100,0.68,0.74,France
+P0035,T011,69,Female,Postmenopausal Osteoporosis,2023-03-25,Active,2026-01-31,S101,0.71,0.76,Germany
+P0036,T011,78,Female,Postmenopausal Osteoporosis,2023-04-08,Active,2026-01-31,S100,0.65,0.71,France
+P0037,T012,32,Male,HIV-1 Infection,2025-02-20,Active,2026-02-28,S110,220,280,South Africa
+P0038,T012,28,Female,HIV-1 Infection,2025-03-08,Active,2026-03-01,S111,190,240,South Africa

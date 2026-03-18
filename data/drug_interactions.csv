@@ -1,0 +1,16 @@
+interaction_id,drug_id_1,drug_id_2,interaction_type,severity,mechanism,clinical_effect,management
+I001,D001,D009,Pharmacokinetic,Moderate,CYP3A4 competition,Increased Oncovitinib plasma levels,Monitor closely; consider dose reduction
+I002,D001,D004,Pharmacodynamic,Mild,Additive CNS effects,Increased risk of fatigue and cognitive impairment,Monitor for excessive sedation
+I003,D002,D003,Pharmacokinetic,Moderate,mTOR/ACE pathway interaction,Increased risk of renal impairment,Monitor renal function monthly
+I004,D002,D009,Pharmacokinetic,Mild,P-glycoprotein competition,Slightly increased exposure of both drugs,Routine monitoring
+I005,D003,D009,Pharmacodynamic,Severe,Additive anticoagulation/hypotension,Increased bleeding risk and severe hypotension,Avoid combination; if necessary, strict monitoring
+I006,D005,D010,Pharmacodynamic,Moderate,Dual immune modulation,Increased risk of immune-related adverse events,Monitor immune function; consider dose adjustments
+I007,D006,D003,Pharmacodynamic,Mild,Additive hypotensive effects,Enhanced blood pressure lowering,Monitor blood pressure regularly
+I008,D006,D009,Pharmacokinetic,Mild,CYP2C9 competition,Slight increase in GLP-1 agonist exposure,No action required; routine monitoring
+I009,D010,D005,Pharmacodynamic,Moderate,Dual immunosuppression,Higher risk of serious infections,Monitor for infections; prophylactic antibiotics if warranted
+I010,D004,D003,Pharmacodynamic,Mild,Additive hypotensive effects,Enhanced orthostatic hypotension,Advise patient on fall prevention; monitor BP
+I011,D007,D006,Pharmacokinetic,Mild,CYP3A4 substrate competition,Minor PDE4 inhibitor level changes,No clinical action required
+I012,D011,D003,Pharmacokinetic,Mild,Calcium channel interaction,Slightly reduced ACE inhibitor efficacy,Monitor blood pressure
+I013,D012,D009,Pharmacokinetic,Severe,Protease inhibitor CYP3A4 inhibition,Large increase in Factor Xa inhibitor exposure causing bleeding risk,Contraindicated; do not co-administer
+I014,D001,D010,Pharmacodynamic,Moderate,Combined targeted therapy,Additive pulmonary toxicity risk,Monitor pulmonary function; chest imaging every 3 months
+I015,D008,D002,Pharmacokinetic,Mild,FXR/mTOR pathway crosstalk,Minor changes in mTOR inhibitor levels,Routine liver function monitoring
